@@ -1,0 +1,56 @@
+{{> appPartials/header title="View Post"}}
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title">View Post</h4>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between m-t-0 m-b-30">
+                                    <a href="/posts" class="text-dark"><button class="btn btn-primary btn-lg waves-effect waves-light">Edit Post</button></a>
+                                    <a href="/posts" class="text-white"><button class="btn btn-danger btn-lg waves-effect waves-light">Back to Posts</button></a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-0">
+                                                <tr>
+                                                    <th scope="col">Post Name</th>
+                                                    <td>{{capitalize post.post_title}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col">Post Message</th>
+                                                    <td>{{capitalize post.post_message}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col">Status</th>
+                                                    {{#if (isStatus post.status) }}
+                                                    <td>Active</td>
+                                                    {{else}}
+                                                    <td>Inactive</td>
+                                                    {{/if}}
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div><!-- container -->
+
+        </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+{{> appPartials/footer}}

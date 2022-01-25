@@ -1,0 +1,70 @@
+{{> appPartials/header title="Manage Posts"}}
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title">Manage Posts</h4>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between m-t-0 m-b-30">
+                                    <h4 class="">Lists of Posts</h4>
+                                    <a href="/posts/create" class="text-white"><button class="btn btn-primary btn-lg waves-effect waves-light">Create New Posts</button></a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Post Name</th>
+                                                        <th scope="col">Post Message</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each posts as | post |}}
+                                                        <tr>
+                                                            <th scope="row">{{serializeNo @key}}</th>
+                                                            <td>{{capitalize post.post_title}}</td>
+                                                            <td>{{capitalize post.post_message}}</td>
+                                                            {{#if (isStatus post.status) }}
+                                                            <td>Active</td>
+                                                            {{else}}
+                                                            <td>Inactive</td>
+                                                            {{/if}}
+                                                            <td>
+                                                                <a href="/posts/edit/{{post._id}}" class="text-dark ml-3"><i class="fas fa-edit"></i></a>
+                                                                <a href="/posts/view/{{post._id}}" class="text-dark ml-3"><i class="fas fa-eye"></i></a>
+                                                                <a href="/posts/delete/{{post._id}}" onclick="return confirm('Are you sure want to delete this post?')" class="text-dark ml-3"><i class="fas fa-trash"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    {{else}}
+                                                        <tr><td class="text-center" colspan="5">No posts are found...</td></tr>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div><!-- container -->
+
+        </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+{{> appPartials/footer }}
