@@ -1,0 +1,52 @@
+<%- include('../layouts/app-layout/header',{title}); -%>
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title">View Post</h4>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between m-t-0 m-b-30">
+                                    <a href="/categories/edit/<%= category._id %>" class="text-dark"><button class="btn btn-primary btn-md waves-effect waves-light">Edit Category</button></a>
+                                    <a href="/categories" class="text-white"><button class="btn btn-danger btn-md waves-effect waves-light">Back to Category</button></a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-0">
+                                                <tr>
+                                                    <th scope="col">Category Name</th>
+                                                    <td><%= category.category_name %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col">Description</th>
+                                                    <td><%= category.category_description %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col">Status</th>
+                                                    <td><%= category.status === 1 ? 'Active' : 'Inactive'%></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div><!-- container -->
+
+        </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+<%- include('../layouts/app-layout/footer') -%>

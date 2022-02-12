@@ -1,0 +1,92 @@
+<%- include('../layouts/app-layout/header',{title}); -%>
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title"><%= title %></h4>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="/categories" method="post">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="category_name" class="font-weight-bold">Category Name</label>
+                                                <input type="text" id="category_name" name="category_name" value="<%= categoryOldValues.category_name %>" class="form-control" placeholder="Category Name">                               
+                                                <% if(messages.validationMsg && messages.validationMsg[0].category_name) { %>
+                                                    <div><small class="text-danger font-weight-bold"><%= messages.validationMsg[0].category_name.msg %></small></div>      
+                                                <% } %>                               
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="category_description" class="font-weight-bold">Category Description</label>
+                                                <textarea name="category_description" id="category_description" cols="30" rows="5" placeholder="Category Description" class="form-control"><%= categoryOldValues.category_description %></textarea>
+                                                <% if(messages.validationMsg && messages.validationMsg[0].category_description) { %>
+                                                    <div><small class="text-danger font-weight-bold"><%= messages.validationMsg[0].category_description.msg %></small></div>      
+                                                <% } %> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="" class="font-weight-bold">Status</label>
+                                                <div class="d-flex">
+                                                    <div class="radio radio-danger">
+                                                            <% if(categoryOldValues.status === 1) { %>
+                                                            <input type="radio" name="status" id="active" value="1" checked>
+                                                            <% } else {%>
+                                                            <input type="radio" name="status" id="active" value="1">
+                                                            <% } %>
+                                                        <label for="active" class="font-weight-bold">
+                                                            Active
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio radio-danger ml-5">
+                                                        <% if(categoryOldValues.status === 0) { %>
+                                                        <input type="radio" name="status" id="inactive" value="0" checked>
+                                                        <% } else {%>
+                                                        <input type="radio" name="status" id="inactive" value="0">
+                                                        <% } %>
+                                                        <label for="inactive" class="font-weight-bold">
+                                                            Inactive
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <% if(messages.validationMsg && messages.validationMsg[0].status) { %>
+                                                    <div><small class="text-danger font-weight-bold"><%= messages.validationMsg[0].status.msg %></small></div>      
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-start">
+                                        <button class="btn btn-primary waves-effect waves-light">Save</button>
+                                        <a href="/categories" class="text-white"><button type="button" class="btn btn-danger ml-2 waves-effect waves-light">Cancel</button></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div><!-- container -->
+
+        </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+
+<%- include('../layouts/app-layout/footer') -%>

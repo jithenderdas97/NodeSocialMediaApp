@@ -1,4 +1,4 @@
-require('dotenv').config({ path: 'backend/config/.env' })
+require('dotenv').config({ path: 'config/.env' })
 const app = require('./app')
 const mongoDb = require('./config/database')
 

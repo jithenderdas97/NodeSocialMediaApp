@@ -1,5 +1,6 @@
 const Product = require('../../models/product')
 const catchAsyncErrors = require('../../utils/catchAsyncErrors')
+const ErrorHandler = require('../../utils/errorHandler')
 
 const createProduct = catchAsyncErrors(async (req, res) => {
     const product = await Product.create(req.body)
@@ -19,32 +20,21 @@ const getProducts = catchAsyncErrors(async (req, res) => {
     })
 })
 
-const viewProduct = catchAsyncErrors(async (req, res) => {
+const viewProduct = catchAsyncErrors(async (req, res, next) => {
     const id = req.params._id
     const singleProduct = await Product.findById(id)
-    if (!singleProduct)
-    {
-        res.status(404).json({
-            success: false,
-            message:`No product found in this id:${id}`
-        })  
-    }
+    if (!singleProduct) return next(new ErrorHandler(`No product found in this id:${id}`, 404))
     res.status(200).json({
         success: true,
         singleProduct
     })
 })
 
-const updateProduct = catchAsyncErrors(async (req, res) => {
+const updateProduct = catchAsyncErrors(async (req, res,next) => {
     const id = req.params._id
     let findProduct = await Product.findById(id)
-    if (!findProduct)
-    {
-        res.status(404).json({
-            success: false,
-            message:`No product found in this id:${id}`
-        })  
-    }
+    if (!findProduct) return next(new ErrorHandler(`No product found in this id:${id}`, 404))
+    
     findProduct = await Product.findByIdAndUpdate(id, req.body, {
         new: true,
         runValidators: true,
@@ -59,13 +49,7 @@ const updateProduct = catchAsyncErrors(async (req, res) => {
 const deleteProduct = catchAsyncErrors(async (req, res) => {
     const id = req.params._id
     const findProduct = await Product.findByIdAndDelete(id)
-    if (!findProduct)
-    {
-        res.status(404).json({
-            success: false,
-            message:`No product found in this id:${id}`
-        })  
-    }
+    if (!findProduct) return next(new ErrorHandler(`No product found in this id:${id}`, 404))
     await Product.findByIdAndDelete(id)
     res.status(204).json({
         success: true,

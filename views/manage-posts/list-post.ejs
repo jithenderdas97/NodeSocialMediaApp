@@ -1,0 +1,85 @@
+<%- include('../layouts/app-layout/header',{title}); -%>
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="">
+            <div class="page-header-title">
+                <h4 class="page-title"><%= title %></h4>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between m-t-0 m-b-30">
+                                    <h4 class="">Lists of Posts</h4>
+                                    <a href="/posts/create" class="text-white"><button class="btn btn-primary btn-lg waves-effect waves-light">Create New Posts</button></a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <% if(messages.success) { %>
+                                            <div class="alert alert-success alert-dismissible fade show">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <span class="font-weight-bold"><%= messages.success %></span>
+                                            </div>
+                                        <% } %>
+                                        <% if(messages.error) { %>
+                                            <div class="alert alert-danger alert-dismissible fade show">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <span class="font-weight-bold"><%= messages.error %></span>
+                                            </div>
+                                        <% } %>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Post Name</th>
+                                                        <th scope="col">Post Message</th>
+                                                        <th scope="col">Post Category</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   <% if(posts.length > 0) { %>
+                                                        <% posts.forEach(function(post,index) { %>
+                                                            <tr>
+                                                                <th scope="row"><%= index + 1 %></th>
+                                                                <td><%= post.post_title %></td>
+                                                                <td><%= post.post_message %></td>
+                                                                <td><%= post.post_category ? post.post_category.category_name : '-' %></td>
+                                                                <td><%= post.status == 1 ? 'Active' : 'Inactive'%></td>
+                                                                <td>
+                                                                    <form action="/posts/delete/<%= post._id %>" method="post">
+                                                                        <input type="hidden" name="_method" value="DELETE">
+                                                                        <a href="/posts/edit/<%= post._id %>" class="text-dark ml-3"><i class="fas fa-edit"></i></a>
+                                                                        <a href="/posts/view/<%= post._id %>" class="text-dark ml-3"><i class="fas fa-eye"></i></a>
+                                                                        <button class="btn btn-link waves-effect waves-light text-dark" onclick="return confirm('Are you sure want to delete this post?')"><i class="fas fa-trash"></i></button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        <% }); %>
+                                                    <% } else { %>
+                                                        <tr><td class="text-center" colspan="5">No posts are found...</td></tr>
+                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div><!-- container -->
+
+        </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+<%- include('../layouts/app-layout/footer') -%>

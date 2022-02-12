@@ -5,7 +5,8 @@ const PostSchema = new mongoose.Schema({
         required:[true, 'Post title is required']
     },
     post_category: {
-        type:String,
+        type: mongoose.Schema.ObjectId,
+        ref:"Category",
         required:[true, 'Post category is required']
     },
     post_privacy: {
